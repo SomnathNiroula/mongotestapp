@@ -10,7 +10,11 @@ id = []
 # returns the UI
 @app.route("/")
 def hello():
-	result = (tbl_counter.find_one())
+    db = dbConnection()
+    if "tbl_counter" in db.collection_names():
+        tbl_counter = db.get_collection('tbl_counter')
+
+        result = (tbl_counter.find_one())
     return render_template("index.html", count=result['counter'])
 
 #posts the count of likes
@@ -37,7 +41,7 @@ def resetData():
 
 
 if __name__ == "__main__":
-	setupDB()
+    setupDB()
     app.run(debug=True,host='0.0.0.0')
 
 
