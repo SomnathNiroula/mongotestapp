@@ -26,7 +26,7 @@ def postData():
 
         tbl_counter.update(tbl_counter.find_one(), {'$inc': {'counter':1}},  upsert=False)
         result = (tbl_counter.find_one())
-        return result['counter']
+        return str(result['counter'])
 
 #resets like to 0
 @app.route("/reset",  methods=['POST'])
@@ -37,7 +37,7 @@ def resetData():
 
         tbl_counter.update(tbl_counter.find_one(), {'$set': {'counter': 0}}, upsert=False)
         result = (tbl_counter.find_one())
-        return result['counter']
+        return str(result['counter'])
 
 
 if __name__ == "__main__":
